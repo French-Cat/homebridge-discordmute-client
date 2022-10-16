@@ -3,7 +3,7 @@ const client = new RPC.Client({ transport: "ipc" });
 
 client.on("ready", async function () {
     require('http').createServer(async function (req, res) {
-        if (req.url == "/mute") {
+        if (req.url == "/toggle/mute") {
             const data = await client.getVoiceSettings()
             client.setVoiceSettings({
                 mute: !data.mute,
@@ -12,7 +12,7 @@ client.on("ready", async function () {
             res.end("200")
             return
         }
-        if (req.url == "/deaf") {
+        if (req.url == "/toggle/deaf") {
             const data = await client.getVoiceSettings()
             client.setVoiceSettings({
                 deaf: !data.deaf,
